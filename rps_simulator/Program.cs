@@ -75,7 +75,12 @@ namespace rps_simulator
                 Console.Write("{0}, ", names[i]);
             }
             Console.Write("{0} ", names[names.Length-1]);
-            
+
+            //create score keeping method
+            int rounds = 0;
+            int wins = 0;
+            int draws = 0;
+
             //accept user choice and process result
             Boolean done = false;
             while (!done)
@@ -86,6 +91,7 @@ namespace rps_simulator
                 int choicePosition = Array.IndexOf(names, userChoiceName);
                 if (choicePosition > -1)
                 {
+                    rounds++;
                     gameChoice userChoice = gameChoices[choicePosition];
                     //valid entry, generate machine's choice, output it and compare results
                     gameChoice machineChoice = gameChoices[rnd.Next(0, gameChoices.Length)];
@@ -97,10 +103,13 @@ namespace rps_simulator
                         case -1:
                             //player loses
                             Console.WriteLine("You win! {0} beats {1}", userChoice.Name, machineChoice.Name);
+                            wins++;
                             break;
                         case 0:
                             //draw
                             Console.WriteLine("It's a draw, you both picked {0}", userChoice.Name);
+                            draws++;
+                            rounds--;
                             break;
                         case 1:
                             //player wins
@@ -112,7 +121,13 @@ namespace rps_simulator
                             break;
                     }
                 }
+                else if (userChoiceName == "done")
+                {
+                    done = true;
+                }
             }
+            Console.WriteLine("You won {0} rounds out of {1} rounds", wins, rounds, draws);
+            Console.ReadLine();
         }
     }
 }
