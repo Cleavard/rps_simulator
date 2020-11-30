@@ -34,7 +34,7 @@ namespace rps_simulator
     }
     class Program
     {
-        public int findResult(gameChoice playerChoice, gameChoice machineChoice)
+        public static int findResult(gameChoice playerChoice, gameChoice machineChoice)
         {
             string machineChoiceName = machineChoice.Name;
             int winPosition = Array.IndexOf(playerChoice.WinsAgainst, machineChoiceName);
@@ -93,16 +93,20 @@ namespace rps_simulator
                     switch (result)
                     {
                         case -1:
-                            //player wins
+                            //player loses
+                            Console.WriteLine("You win! {0} beats {1}", userChoice.Name, machineChoice.Name);
                             break;
                         case 0:
                             //draw
+                            Console.WriteLine("It's a draw, you both picked {0}", userChoice.Name);
                             break;
                         case 1:
-                            //machine wins
+                            //player wins
+                            Console.WriteLine("You lose! {0} beats {1}", machineChoice.Name, userChoice.Name);
                             break;
                         case 2:
                             //error
+                            Console.WriteLine("Error, something wrong happened");
                             break;
                     }
                 }
