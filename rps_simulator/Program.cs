@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace rps_simulator
 {
@@ -75,22 +76,23 @@ namespace rps_simulator
                 Console.Write("{0}, ", names[i]);
             }
             Console.Write("{0} ", names[names.Length-1]);
+            Console.WriteLine();
 
             //create score keeping method
             int rounds = 0;
             int wins = 0;
             int draws = 0;
-
+            int[] choiceUses = new int[names.Length];
             //accept user choice and process result
             Boolean done = false;
             while (!done)
             {
-                Console.WriteLine();
 
                 string userChoiceName = Console.ReadLine();
                 int choicePosition = Array.IndexOf(names, userChoiceName);
                 if (choicePosition > -1)
                 {
+                    choiceUses[choicePosition]++;
                     rounds++;
                     gameChoice userChoice = gameChoices[choicePosition];
                     //valid entry, generate machine's choice, output it and compare results
@@ -109,7 +111,6 @@ namespace rps_simulator
                             //draw
                             Console.WriteLine("It's a draw, you both picked {0}", userChoice.Name);
                             draws++;
-                            rounds--;
                             break;
                         case 1:
                             //player wins
@@ -123,10 +124,36 @@ namespace rps_simulator
                 }
                 else if (userChoiceName == "done")
                 {
+                    //user is done with the game
                     done = true;
                 }
+                else
+                {
+                    //some sort of error idk
+                    Console.WriteLine("Invalid input, please try again");
+                }
             }
-            Console.WriteLine("You won {0} rounds out of {1} rounds", wins, rounds, draws);
+            Console.WriteLine("You won {0} rounds out of {1} rounds with {2} draws", wins, rounds, draws);
+            Console.WriteLine();
+            Console.WriteLine("Overall Result:");
+            if (wins > ((rounds - draws) - wins))
+            {
+                //player wins
+                Console.WriteLine("YOU WIN!!!!! You should go pro with that performance");
+            }
+            else if (wins < ((rounds - draws) - wins))
+            {
+                //machine wins
+                Console.WriteLine("you lose........noob");
+            }
+            else
+            {
+                //draw
+                Console.WriteLine("It's a draw? Pretty anticlimactic but oh well.");
+            }
+            Console.WriteLine();
+            int maxPosition = Array.IndexOf(choiceUses, choiceUses.Max());
+            Console.WriteLine("Your most picked option was {0}, which you chose {1} out of {2} times", names[maxPosition], choiceUses[maxPosition], rounds);
             Console.ReadLine();
         }
     }
