@@ -1,5 +1,4 @@
 ﻿using System;
-using Random;
 
 namespace rps_simulator
 {
@@ -57,8 +56,7 @@ namespace rps_simulator
         {
             Random rnd = new Random();
             //instantiate game choices
-            gameChoice[] gameChoices =
-            {
+            gameChoice[] gameChoices = {
                 new gameChoice("rock", new string[]{"scissors"}, new string[]{"paper"}),
                 new gameChoice("paper", new string[]{"rock"}, new string[]{"scissors"}),
                 new gameChoice("scissors", new string[]{"paper"}, new string[]{"rock"})
@@ -80,14 +78,18 @@ namespace rps_simulator
             
             //accept user choice and process result
             Boolean done = false;
-            while (!done){
+            while (!done)
+            {
+                Console.WriteLine();
+
                 string userChoiceName = Console.ReadLine();
                 int choicePosition = Array.IndexOf(names, userChoiceName);
                 if (choicePosition > -1)
                 {
                     gameChoice userChoice = gameChoices[choicePosition];
-                    //valid entry, generate machine's choice and compare results
+                    //valid entry, generate machine's choice, output it and compare results
                     gameChoice machineChoice = gameChoices[rnd.Next(0, gameChoices.Length)];
+                    Console.WriteLine("The very smart machine chose {0}", machineChoice.Name);
 
                     int result = findResult(userChoice, machineChoice);
                     switch (result)
