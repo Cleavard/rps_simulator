@@ -58,9 +58,11 @@ namespace rps_simulator
             Random rnd = new Random();
             //instantiate game choices
             gameChoice[] gameChoices = {
-                new gameChoice("rock", new string[]{"scissors"}, new string[]{"paper"}),
-                new gameChoice("paper", new string[]{"rock"}, new string[]{"scissors"}),
-                new gameChoice("scissors", new string[]{"paper"}, new string[]{"rock"})
+                new gameChoice("rock", new string[]{"scissors", "lizard"}, new string[]{"paper", "spock"}),
+                new gameChoice("paper", new string[]{"rock", "spock"}, new string[]{"scissors", "lizard"}),
+                new gameChoice("scissors", new string[]{"paper", "lizard"}, new string[]{"rock", "spock"}),
+                new gameChoice("lizard", new string[]{"paper", "spock"}, new string[]{"rock", "scissors"}),
+                new gameChoice("spock", new string[]{"rock", "scissors"}, new string[]{"scissors", "lizard"})
             };
 
             //write out options to console
