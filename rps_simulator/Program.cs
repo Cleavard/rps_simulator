@@ -62,7 +62,7 @@ namespace rps_simulator
                 new gameChoice("paper", new string[]{"rock", "spock"}, new string[]{"scissors", "lizard"}),
                 new gameChoice("scissors", new string[]{"paper", "lizard"}, new string[]{"rock", "spock"}),
                 new gameChoice("lizard", new string[]{"paper", "spock"}, new string[]{"rock", "scissors"}),
-                new gameChoice("spock", new string[]{"rock", "scissors"}, new string[]{"scissors", "lizard"})
+                new gameChoice("spock", new string[]{"rock", "scissors"}, new string[]{"paper", "lizard"})
             };
 
             //write out options to console
@@ -90,7 +90,7 @@ namespace rps_simulator
             while (!done)
             {
 
-                string userChoiceName = Console.ReadLine();
+                string userChoiceName = Console.ReadLine().ToLower();
                 int choicePosition = Array.IndexOf(names, userChoiceName);
                 if (choicePosition > -1)
                 {
@@ -135,7 +135,9 @@ namespace rps_simulator
                     Console.WriteLine("Invalid input, please try again");
                 }
             }
-            Console.WriteLine("You won {0} rounds out of {1} rounds with {2} draws", wins, rounds, draws);
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine("You won {0} rounds out of {1} round(s) with {2} draw(s)", wins, rounds, draws);
             Console.WriteLine();
             Console.WriteLine("Overall Result:");
             if (wins > ((rounds - draws) - wins))
